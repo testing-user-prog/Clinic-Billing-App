@@ -1,0 +1,10 @@
+{
+    "server": "DESKTOP-MR9M7FO\\SQLEXPRESS",
+    "database": "MedicineBilling",
+    "driver": "ODBC Driver 17 for SQL Server",
+    "trusted_connection": true,
+    "username": "",
+    "password": "",
+    "printer_name": "FIT FP-1000 Raster",
+    "clinic_name": "XYZ"
+}
