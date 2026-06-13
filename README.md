@@ -1,13 +1,15 @@
 # Medicine Billing System
 
-A desktop application for managing medicine inventory, doctor records, and generating printed pharmacy bills. Built with Python and Tkinter, backed by Microsoft SQL Server.
+A desktop application for managing medicine inventory, patient billing, doctor records, and generating printed pharmacy bills. Built with Python and Tkinter, backed by Microsoft SQL Server.
 
 ---
 
 ## Features
 
 - **Medicine Billing** — Select medicines, set quantities, and print a formatted bill directly to a thermal/receipt printer
+- **Patient Billing** — Generate bills for patients including consultation and service charges
 - **Stock Management** — Add new medicines or restock existing ones; optionally update prices at the same time
+- **Inventory Check** — View current stock levels and flag medicines that have fallen below a configurable low-stock threshold
 - **Doctor Management** — Update consultation fees for registered doctors
 - **Direct Printer Support** — Bills are sent to a physical printer via the Windows GDI (`pywin32`), formatted for receipt-style output
 - **Stock Validation** — Prevents billing more units than available; re-validates stock at print time
@@ -40,7 +42,9 @@ Medicine Billing/
 │   └── doctor.py            # Doctor queries and stored proc calls
 └── views/
     ├── medicinebilling.py   # Medicine billing window
+    ├── patientbilling.py    # Patient billing window
     ├── addstock.py          # Add/update stock window
+    ├── checkinventory.py    # Inventory check with low-stock alerts
     └── manage_doctors.py    # Doctor fee management window
 ```
 
@@ -105,12 +109,14 @@ Edit `config.json` to match your environment:
     "username": "",
     "password": "",
     "printer_name": "Your Printer Name",
-    "clinic_name": "Your Clinic Name"
+    "clinic_name": "Your Clinic Name",
+    "low_medicine_threshold": 10
 }
 ```
 
 - Set `trusted_connection` to `true` to use Windows Authentication, or `false` and fill in `username`/`password` for SQL Server auth.
 - `printer_name` must exactly match the printer name in Windows Settings → Printers & Scanners.
+- `low_medicine_threshold` sets the stock level below which a medicine is flagged as low in the inventory view.
 
 ### 6. Run the app
 
