@@ -6,6 +6,15 @@ def get_all_medicines():
         cursor.execute("SELECT medicineid, MedicineName, Price, StockQuantity FROM Medicines")
         return cursor.fetchall()
 
+def get_low_stock_medicines(threshold=10):
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT MedicineName, Price, StockQuantity FROM Medicines WHERE StockQuantity < ? ORDER BY StockQuantity ASC",
+            threshold
+        )
+        return cursor.fetchall()
+
 def get_medicine_by_name(name):
     with get_connection() as conn:
         cursor = conn.cursor()
