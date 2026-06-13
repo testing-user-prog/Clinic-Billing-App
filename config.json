@@ -6,5 +6,6 @@
     "username": "",
     "password": "",
     "printer_name": "FIT FP-1000 Raster",
-    "clinic_name": "XYZ"
+    "clinic_name": "XYZ",
+    "low_medicine_threshold": 10
 }

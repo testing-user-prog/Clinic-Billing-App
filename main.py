@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import pyodbc
-from db import get_connection
+from db import get_connection, load_config
 from views.manage_doctors import open_manage_doctors
 from views.addstock import open_update_medicines
 from views.medicinebilling import open_medicine_billing
@@ -14,6 +14,10 @@ try:
     conn.close()
 except pyodbc.Error as e:
     print(f"Connection failed: {e}")
+
+# ─── CONFIG ───────────────────────────────────────────────────────────────────
+config    = load_config()
+threshold = config.get("low_medicine_threshold", 10)
 
 # ─── MAIN WINDOW ──────────────────────────────────────────────────────────────
 root = tk.Tk()
@@ -39,7 +43,7 @@ ttk.Button(bottom_frame, text="Manage Doctors",    command=open_manage_doctors, 
 ttk.Button(bottom_frame, text="Do Patient Billing",command=open_patient_billing,                             **btn_style).pack(pady=8)
 ttk.Button(bottom_frame, text="Do Medicine Billing",command=open_medicine_billing,    **btn_style).pack(pady=8)
 ttk.Button(bottom_frame, text="Add Stock",         command=open_update_medicines,               **btn_style).pack(pady=8)
-ttk.Button(bottom_frame, text="Check Inventory",   command=open_check_inventory,                **btn_style).pack(pady=8)
+ttk.Button(bottom_frame, text="Check Inventory",   command=lambda: open_check_inventory(threshold), **btn_style).pack(pady=8)
 
 # ─── START ────────────────────────────────────────────────────────────────────
 root.mainloop()
