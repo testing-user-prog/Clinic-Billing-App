@@ -5,6 +5,8 @@ from db import get_connection
 from views.manage_doctors import open_manage_doctors
 from views.addstock import open_update_medicines
 from views.medicinebilling import open_medicine_billing
+from views.patientbilling import open_patient_billing
+from views.checkinventory import open_check_inventory
 # ─── TEST CONNECTION ──────────────────────────────────────────────────────────
 try:
     conn = get_connection()
@@ -34,9 +36,10 @@ ttk.Label(top_frame, text="Select an option to continue", font=("Arial", 10)).pa
 btn_style = {"width": 25, "padding": 10}
 
 ttk.Button(bottom_frame, text="Manage Doctors",    command=open_manage_doctors,                              **btn_style).pack(pady=8)
-ttk.Button(bottom_frame, text="Do Patient Billing",command=lambda: print("Do Patient Billing clicked"),      **btn_style).pack(pady=8)
+ttk.Button(bottom_frame, text="Do Patient Billing",command=open_patient_billing,                             **btn_style).pack(pady=8)
 ttk.Button(bottom_frame, text="Do Medicine Billing",command=open_medicine_billing,    **btn_style).pack(pady=8)
 ttk.Button(bottom_frame, text="Add Stock",         command=open_update_medicines,               **btn_style).pack(pady=8)
+ttk.Button(bottom_frame, text="Check Inventory",   command=open_check_inventory,                **btn_style).pack(pady=8)
 
 # ─── START ────────────────────────────────────────────────────────────────────
 root.mainloop()
