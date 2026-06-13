@@ -2,10 +2,8 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from models.medicine import get_low_stock_medicines
 
-THRESHOLD = 10
 
-
-def open_check_inventory():
+def open_check_inventory(threshold):
     window = tk.Toplevel()
     window.title("Check Inventory")
     window.geometry("480x400")
@@ -14,7 +12,7 @@ def open_check_inventory():
     ttk.Label(window, text="Low Stock Inventory", font=("Arial", 16, "bold")).pack(pady=12)
     ttk.Label(
         window,
-        text=f"Medicines with stock below {THRESHOLD} unit(s)",
+        text=f"Medicines with stock below {threshold} unit(s)",
         font=("Arial", 9),
         foreground="gray"
     ).pack()
@@ -51,7 +49,7 @@ def open_check_inventory():
             tree.delete(item)
 
         try:
-            rows = get_low_stock_medicines(THRESHOLD)
+            rows = get_low_stock_medicines(threshold)
         except Exception as e:
             messagebox.showerror("Database Error", f"Failed to load inventory:\n{e}", parent=window)
             return
