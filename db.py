@@ -7,10 +7,19 @@ def load_config():
 
 def get_connection():
     cfg = load_config()
-    conn_str = (
-        f"DRIVER={{{cfg['driver']}}};"
-        f"SERVER={cfg['server']};"
-        f"DATABASE={cfg['database']};"
-        f"Trusted_Connection=yes;"
-    )
+    if cfg['trusted_connection']:
+        conn_str = (
+            f"DRIVER={{{cfg['driver']}}};"
+            f"SERVER={cfg['server']};"
+            f"DATABASE={cfg['database']};"
+            f"Trusted_Connection=yes;"
+        )
+    else:
+        conn_str = (
+            f"DRIVER={{{cfg['driver']}}};"
+            f"SERVER={cfg['server']};"
+            f"DATABASE={cfg['database']};"
+            f"UID={cfg['username']};"
+            f"PWD={cfg['password']};"
+        )
     return pyodbc.connect(conn_str)
