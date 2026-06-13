@@ -72,4 +72,4 @@ def open_check_inventory():
 
     load_data()
 
-    ttk.Button(window, text="Refresh", command=load_data, width=16).pack(pady=(0, 12))
+    
